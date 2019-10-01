@@ -6,12 +6,9 @@ namespace ice_cream_algorithm
     {
         static void Main(string[] args)
         {
-            InputNumberUsers inputNumberUsers = new InputNumberUsers();
-            IceCreamInput iceCreamInput = new IceCreamInput();
-            IceCreamDecider iceCreamDecider = new IceCreamDecider();
-
-            inputNumberUsers.inputNumberOfUsers();
-
+            int numberOfUsers = InputNumberUsers.inputNumberOfUsers();
+            string[] iceCreamSelection = IceCreamInput.iceCreamSelection();
+            IceCreamDecider.IceCreamAlgorithm();
         }
     }
 
@@ -34,18 +31,23 @@ namespace ice_cream_algorithm
             bool enteringIceCreams = true;
             while(enteringIceCreams == true)
             {
-                Console.WriteLine("Current Ice Creams:");
+                Console.Clear();
+                Console.WriteLine("-------------------");
+                Console.Write("Current Ice Creams: ");
                 foreach (string i in iceCreams) {
-                    Console.Write("{0}\t", i.ToString()); }
+                    Console.Write(i.ToString() + ", "); }
+                Console.WriteLine();
+                Console.WriteLine("-------------------");
+                Console.WriteLine("Ice Cream Data Entry:");
+                Console.WriteLine("Keywords: Exit = Close Program, Done = Finished Entering Data, Reset = Clear Current Ice Creams");
+                Console.Write("Please enter a flavour of Ice Cream to compute (type Exit once done): ");
+                Console.WriteLine("-------------------");
                 string lastEntry = Console.ReadLine();
-                if(lastEntry == "Exit")
-                {
-                    enteringIceCreams = false;
-                }
-                else
-                {
-                    iceCreams.Add(lastEntry);
-                }
+                if(lastEntry == "Clear") {iceCreams.Clear();}
+                else if(lastEntry == "Exit") {Environment.Exit(0);}
+                else if(lastEntry == "Done") {enteringIceCreams = false;}
+                else {iceCreams.Add(lastEntry);}
+                
             }
             return iceCreams.ToArray();
         }
@@ -53,6 +55,9 @@ namespace ice_cream_algorithm
 
     class IceCreamDecider
     {
-
+        public static void IceCreamAlgorithm()
+        {
+            
+        }
     }
 }
