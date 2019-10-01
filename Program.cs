@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 namespace ice_cream_algorithm
 {
+
     class Program
     {
         static void Main(string[] args)
         {
             int numberOfUsers = InputNumberUsers.inputNumberOfUsers();
             string[] iceCreamSelection = IceCreamInput.iceCreamSelection();
-            IceCreamDecider.IceCreamAlgorithm();
+            IceCreamDecider.IceCreamAlgorithm(numberOfUsers, iceCreamSelection);
         }
     }
 
@@ -41,6 +42,7 @@ namespace ice_cream_algorithm
                 Console.WriteLine("Ice Cream Data Entry:");
                 Console.WriteLine("Keywords: Exit = Close Program, Done = Finished Entering Data, Reset = Clear Current Ice Creams");
                 Console.Write("Please enter a flavour of Ice Cream to compute (type Exit once done): ");
+                Console.WriteLine();
                 Console.WriteLine("-------------------");
                 string lastEntry = Console.ReadLine();
                 if(lastEntry == "Clear") {iceCreams.Clear();}
@@ -55,9 +57,21 @@ namespace ice_cream_algorithm
 
     class IceCreamDecider
     {
-        public static void IceCreamAlgorithm()
-        {
-            
+        public static void IceCreamAlgorithm(int numberOfUsers, string[] iceCreams){
+            for(int i = 0; i < numberOfUsers; i++)
+            {
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------");
+                Console.WriteLine("User " + i + ", please choose an ice cream flavour from the list below.");
+                Console.WriteLine("Use the number keys to choose your selection.");
+                Console.WriteLine("-----------------------------------------------------------------------");
+                for(int index = 0; index < iceCreams.Length; index++)
+                {
+                    Console.WriteLine((index + 1) + ") " + iceCreams[index]);
+                }
+                Console.WriteLine("-----------------------------------------------------------------------");
+                
+            }
         }
     }
 }
