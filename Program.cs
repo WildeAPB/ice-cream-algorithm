@@ -8,16 +8,16 @@ namespace ice_cream_algorithm
     {
         static void Main(string[] args)
         {
-            string[] users = InputNumberUsers.inputNumberOfUsers();
-            string[] iceCreamSelection = IceCreamInput.iceCreamSelection();
-            IceCreamDecider.IceCreamAlgorithm(users, iceCreamSelection);
+            string[] users = IceCreamSetup.userSetup();
+            string[] iceCreamSelection = IceCreamSetup.iceCreamSetup();
+            IceCreamAlgorithm.runAlgorithm(users, iceCreamSelection);
         }
     }
 
 
-    class InputNumberUsers
+    class IceCreamSetup
     {
-        public static string[] inputNumberOfUsers()
+        public static string[] userSetup()
         {
             List<string> users = new List<string>{};
             bool enteringUsers = true;
@@ -43,11 +43,8 @@ namespace ice_cream_algorithm
             }
             return users.ToArray();
         }
-    }
-    
-    class IceCreamInput
-    {
-        public static string[] iceCreamSelection()
+
+        public static string[] iceCreamSetup()
         {
             List<string> iceCreams = new List<string>{};
             bool enteringIceCreams = true;
@@ -76,10 +73,11 @@ namespace ice_cream_algorithm
         }
     }
 
-    class IceCreamDecider
+    class IceCreamAlgorithm
     {
-        public static void IceCreamAlgorithm(string[] users, string[] iceCreams){
+        public static void runAlgorithm(string[] users, string[] iceCreams){
             Dictionary<string, string> userChoices = new Dictionary<string, string>();
+            Dictionary<string, int> popularIceCreams = new Dictionary<string, int>();
             foreach(var user in users)
             {
                 Console.Clear();
@@ -92,7 +90,16 @@ namespace ice_cream_algorithm
                     Console.WriteLine((index + 1) + ") " + iceCreams[index]);
                 }
                 Console.WriteLine("-----------------------------------------------------------------------");
-                userIceCreamChoice = 
+                var userInput = int.TryParse(Console.ReadKey().KeyChar.ToString(), out int userIceCreamChoice);
+                userChoices.Add(user, iceCreams[(userIceCreamChoice - 1)]);
+                
+            }
+            foreach(var icecream in iceCreams)
+            {
+                popularIceCreams.Add(icecream, 0);
+            }
+            foreach(var choice in userChoices)
+            {
                 
             }
         }
