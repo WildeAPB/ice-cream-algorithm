@@ -5,22 +5,24 @@ namespace ice_cream_algorithm
 {
     class Algorithm
     {
-        public static Dictionary<string, string> userChoices = new Dictionary<string, string>();
-        public static Dictionary<string, int> popularIceCreams = new Dictionary<string, int>();
-        public static string[] iceCreams, users;
-        public static void RunAlgorithm(string[] setupUsers, string[] setupIceCreams)
+        protected Dictionary<string, string> userChoices = new Dictionary<string, string>();
+        protected Dictionary<string, int> popularIceCreams = new Dictionary<string, int>();
+        protected string[] iceCreams, users;
+        protected bool consensusReached = false;
+
+        public void RunAlgorithm(string[] users, string[] iceCreams)
         {
-            users = setupUsers;
-            iceCreams = setupIceCreams;
-            //Get user choices.
-            UserInput(users, iceCreams);
-            //Sort user choices.
-            IceCreamSort();
-            //Repeat
-            Console.ReadKey();
+            this.users = users;
+            this.iceCreams = iceCreams;
+            while(this.consensusReached == false)
+            {
+                UserInput(users, iceCreams);
+                IceCreamSort();
+            }
+            
         }
 
-        private static void UserInput(string[] users, string[] choices)
+        private void UserInput(string[] users, string[] choices)
         {
             foreach(var user in users)
             {
@@ -40,7 +42,7 @@ namespace ice_cream_algorithm
             }
         }
 
-        private static void IceCreamSort()
+        private void IceCreamSort()
         {
             foreach(var icecream in iceCreams)
             {
@@ -62,7 +64,7 @@ namespace ice_cream_algorithm
             {
                 if(iceCream.Value == users.Length)
                 {
-                    Console.WriteLine("Consensus was reached. Chosen Ice Cream was {0} with {1} votes.", iceCream.Key, iceCream.Value);
+                    consensusReached = true;
                     break;
                 }
             }

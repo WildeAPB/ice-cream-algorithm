@@ -10,7 +10,8 @@ namespace ice_cream_algorithm
         {
             string[] users = Setup.UserSetup();
             string[] iceCreamSelection = Setup.IceCreamSetup();
-            Algorithm.RunAlgorithm(users, iceCreamSelection);
+            Algorithm algorithm = new Algorithm();
+            algorithm.RunAlgorithm(users, iceCreamSelection);
         }
     }
 }
